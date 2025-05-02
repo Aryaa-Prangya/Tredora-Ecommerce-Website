@@ -17,14 +17,15 @@ export class UserService {
 
   singUp(value: singUp) {
     this.http.post('http://localhost:3000/user', value, { observe: 'response' }).subscribe((result) => {
-      this.isUserLogedIn.next(true)
+      this.isUserLogedIn.next(true);
       if (result) {
         localStorage.setItem('user', JSON.stringify(result.body));
-        this.router.navigate(['/'])
+        // REMOVE THIS LINE 👇
+        // this.router.navigate(['/']);
       }
-    })
+    });
   }
-
+  
   userAuthReload() {
     if (localStorage.getItem('user')) {
       this.router.navigate(['/'])

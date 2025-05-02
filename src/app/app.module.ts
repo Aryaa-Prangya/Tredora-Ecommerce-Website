@@ -7,13 +7,13 @@ import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { SellerAuthComponent } from './seller-auth/seller-auth.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
 import { SellerAddProductComponent } from './seller-add-product/seller-add-product.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './search/search.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FooterComponent } from './footer/footer.component';
@@ -22,7 +22,11 @@ import { CartPageComponent } from './cart-page/cart-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
-
+import { ButtonModule } from 'primeng/button';
+import { NotificationPreferencesComponent } from './notification-preferences/notification-preferences.component';
+import { CustomerSupportComponent } from './customer-support/customer-support.component';
+import { LiveChatComponent } from './live-chat/live-chat.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,18 +43,27 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     CartPageComponent,
     CheckoutComponent,
     MyOrdersComponent,
-    AlertBoxComponent
+    AlertBoxComponent,
+    NotificationPreferencesComponent,
+    CustomerSupportComponent,
+    LiveChatComponent
   ],
   imports: [
     BrowserModule,
+    NgbProgressbarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

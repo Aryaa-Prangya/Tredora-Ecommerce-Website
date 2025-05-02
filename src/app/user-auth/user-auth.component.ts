@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { cart, login, product, singUp } from '../data-type';
 import { ProductService } from '../services/product.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-auth',
@@ -9,68 +12,69 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./user-auth.component.css']
 })
 export class UserAuthComponent implements OnInit {
+  signupForm: FormGroup;
+  loginForm: FormGroup;
+  showLogin = false;
+  loginError = false;
 
-  showLogin: boolean = true
-  authError: any
+  constructor(private fb: FormBuilder, private userService: UserService,private toastr:ToastrService) {
+    this.signupForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z\s]+$/) // Only letters and spaces
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/)
+        // Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+      ]]
+    });
+    
+    this.loginForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/)
+      ]]
+    });
+    
+  }
 
-  constructor(private user: UserService, private product: ProductService) { }
   ngOnInit(): void {
-    this.user.userAuthReload();
+    this.userService.isLoginFail.subscribe((fail) => {
+      this.loginError = fail;
+   
+    });
   }
 
-  singUp(value: singUp) {
-    this.user.singUp(value);
+  toggleForm(showLogin: boolean) {
+    this.showLogin = showLogin;
   }
 
-  opneLogin() {
-    this.showLogin = true
-  }
-  opneSingup() {
-    this.showLogin = false  
-  } 
-
-  login(value: login) {
-    this.user.userLogin(value);
-    this.user.isLoginFail.subscribe((isError) => {
-      if (isError) {
-        this.authError = 'Email or Password is not correct';
-      }
-      else {
-        this.localCartToRemotecart();
-      }
-    })
-  }
-
-  localCartToRemotecart() {
-    let data = localStorage.getItem('localCart');
-    let user = localStorage.getItem('user');
-    let userId = user && JSON.parse(user).id;
-    if (data) {
-      let cartDatalist: product[] = JSON.parse(data);
-
-
-      cartDatalist.forEach((prduct: product, index) => {
-        let cartData: cart = {
-          ...prduct,
-          productId: prduct.id,
-          userId
-        };
-        delete cartData.id;
-        setTimeout(() => {
-          this.product.userAddToCart(cartData).subscribe((result) => {
-            if (result) {
-              console.log("Item store in DB");
-            }
-          });
-          if (cartDatalist.length === index + 1) {
-            localStorage.removeItem('localCart');
-          }
-        }, 500);
-      });
+  onSignUp() {
+    if (this.signupForm.valid) {
+      this.userService.singUp(this.signupForm.value);
+    
+      this.toastr.success('Signup successful! Please login now.');
+      this.signupForm.reset()
+      this.toggleForm(true); // show login form
     }
-    setTimeout(() => {
-      this.product.getCartList(userId)
-    }, 2000);
-
+    else{
+      this.toastr.error('Please fill all the fields')
+    }
+  }
+  
+  onSignIn() {
+    if (this.loginForm.valid) {
+      this.userService.userLogin(this.loginForm.value);
+      this.toastr.success('SignIn successful! Happy Shopping !');
+    }
   }
 }

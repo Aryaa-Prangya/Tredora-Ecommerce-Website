@@ -1,0 +1,50 @@
+.support-container {
+    max-width: 1000px;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .support-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .support-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .support-icon {
+    font-size: 2rem;
+    color: #0d6efd;
+    margin-bottom: 10px;
+  }
+  
+  .faq-section h4 {
+    margin-bottom: 20px;
+  }
+  
+  .list-group-item {
+    border: none;
+    background-color: #f9f9f9;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+  
+  .support-form h4 {
+    margin-bottom: 20px;
+  }
+  
+  button.btn-success {
+    padding: 8px 30px;
+  }
+  .faq-section {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .ngb-accordion .card-header {
+    font-weight: 600;
+  }
+  

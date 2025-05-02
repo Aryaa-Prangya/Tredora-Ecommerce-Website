@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { cart, priceSummary, product } from '../data-type';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart-page',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart-page.component.css']
 })
 export class CartPageComponent implements OnInit {
-  constructor(private product: ProductService, private route: Router) { }
+  constructor(private product: ProductService, private route: Router,private toastr: ToastrService) { }
   localCartData: any
   cartData: cart[] | undefined;
   noProductMsg = ''
@@ -59,7 +60,7 @@ export class CartPageComponent implements OnInit {
       let data = localStorage.getItem('localCart')
       let userStore = localStorage.getItem('localCart')
       let userData = userStore && JSON.parse(userStore);
-      console.log("cartData=", userData);
+   
       this.cartData = userData
 
       let amount = 0
@@ -88,6 +89,7 @@ export class CartPageComponent implements OnInit {
     let cartData = localStorage.getItem('localCart');
     if (!localStorage.getItem('user')) {
       this.product.removeItemsFromCart(id)
+      this.toastr.success('Item successfully removed from your cart.')
       this.call()
     }
     else {
@@ -107,7 +109,8 @@ export class CartPageComponent implements OnInit {
       this.route.navigate(['/checkout'])
     }
     else{
-      this.msgUserNotLogin='You need to Login...'
+      // this.msgUserNotLogin='You need to Login...'
+      this.toastr.warning('You need to Login...')
       this.call()
     }
     

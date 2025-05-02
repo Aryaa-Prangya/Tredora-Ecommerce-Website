@@ -26,4 +26,34 @@ export class MyOrdersComponent implements OnInit{
       this.callCartList();
     })
   }
+  getProgressValue(status: string): number {
+    switch (status) {
+      case 'Order Placed':
+        return 25;
+      case 'Shipped':
+        return 50;
+      case 'On the way':
+        return 75;
+      case 'Delivered':
+        return 100;
+      default:
+        return 0;
+    }
+  }
+  
+  getProgressType(status: string): string {
+    switch (status) {
+      case 'Order Placed':
+        return 'info';
+      case 'Shipped':
+        return 'primary';
+      case 'On the way':
+        return 'warning';
+      case 'Delivered':
+        return 'success';
+      default:
+        return 'secondary';
+    }
+  }
+  
 }

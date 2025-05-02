@@ -80,11 +80,13 @@ export class HeaderComponent implements OnInit {
   
   userlogoutpopup(){
     this.popup.openPopUp();
+
   }
   userlogout() {
     localStorage.removeItem('user');
     this.route.navigate(['user-auth']);
      this.product.cartData.emit([]);
+
   }
 
   sellerlogoutpopup(){
@@ -121,4 +123,17 @@ export class HeaderComponent implements OnInit {
     //Set name in search box
     this.searchName = name
   }
+  msgUserNotLogin: string = '';
+
+goToNotification() {
+  if (localStorage.getItem('user')) {
+    console.log("user");
+    
+    window.location.href = '/notifications'; 
+  } else {
+   
+    this.msgUserNotLogin = 'You need to Login to get notifications...';
+    alert(this.msgUserNotLogin)
+  }
+}
 }

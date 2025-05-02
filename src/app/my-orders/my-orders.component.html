@@ -19,7 +19,16 @@
                     <div class="d-flex justify-content-between">
                         <p> Order Id: <br>#{{item.id}}</p>
                         <p>Price: <br>{{item.totalPrice}}</p>
-                        <p>Status: <br>No the way</p>
+                        <p>Status:</p>
+<ngb-progressbar 
+  [value]="getProgressValue(item.status)"
+  [striped]="true" 
+  [animated]="true" 
+  type="{{ getProgressType(item.status) }}"
+  class="w-100 mt-2">
+  {{ item.status }}
+</ngb-progressbar>
+
                         <div> 
                             <button type="button" (click)="cancleOrder(item.id)" class="btn btn-danger mt-2">Cancel Order</button>
                         </div>

@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
   Call(){
     // console.log("call searg page")
     this.word=this.route.snapshot.paramMap.get('word'); 
-     console.log('word = ',this.word)
+
 
     this.word && this.product.searchProducts(this.word).subscribe((result)=>{
       this.productDetails=result

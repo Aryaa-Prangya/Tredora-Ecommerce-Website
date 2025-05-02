@@ -1,18 +1,139 @@
-.card-style{
-    width: 60%;
+.auth-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .auth-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 40px;
+  }
+  
+  .auth-form {
+    width: 100%;
+    max-width: 360px;
+    /* text-align: center; */
+  }
+  
+  .logo {
+    width: 40px;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .sub-text {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 30px;
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 9px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .or {
+    margin: 15px 0;
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .google-btn {
+    background: white;
+    border: 1px solid #ddd;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .google-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .switch-text {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .switch-text a {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .auth-right {
+    flex: 1;
+    background: linear-gradient(to top right, #001f3f, #0074d9);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('https://i.pinimg.com/736x/06/a9/6b/06a96b90be7e8cdc29cff96afc834be9.jpg');
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
     position: relative;
-    left: 21%;
-    background-color: rgb(228, 196, 241);
-}
-.center{
-   width: 40%;
-   font-size: large;
-   font-weight: 500;
-}
-
-.red{
-    color: red;
-}
-.green{
-     color: green;
-}
+  }
+  
+  .testimonial {
+    text-align: center;
+    max-width: 400px;
+  }
+  
+  .testimonial-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .quote {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  .author {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .signupform{
+    small{
+      color: red;
+      text-align: left;
+      
+    }
+  }

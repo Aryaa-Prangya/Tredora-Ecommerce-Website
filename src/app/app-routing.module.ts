@@ -13,6 +13,9 @@ import { CartPageComponent } from './cart-page/cart-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { NotificationPreferencesComponent } from './notification-preferences/notification-preferences.component';
+import { CustomerSupportComponent } from './customer-support/customer-support.component';
+import { LiveChatComponent } from './live-chat/live-chat.component';
 
 const routes: Routes = [
   { path:'',component:HomeComponent},
@@ -50,6 +53,10 @@ const routes: Routes = [
     path:'checkout',component:CheckoutComponent
     
   } ,
+  { path: 'notifications', component: NotificationPreferencesComponent },
+  { path: '', redirectTo: '/notifications', pathMatch: 'full' },
+  {path:'customer-support',component:CustomerSupportComponent},
+  {path:'live-chat',component:LiveChatComponent},
   {
     path:'my-order',component:MyOrdersComponent
   },

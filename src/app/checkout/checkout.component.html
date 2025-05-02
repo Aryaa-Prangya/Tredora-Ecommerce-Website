@@ -10,10 +10,10 @@
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="text-center">
                 <h1 class="heading">Add Shipping Address</h1>
-            <form class=" mt-4" #orderData="ngForm"  (ngSubmit)="oderNow(orderData.value)">
+            <form class=" mt-4" #orderData="ngForm"  (ngSubmit)="orderNow(orderData.value)">
                 <input type="text"  name="email" placeholder="Enter your Email" ngModel #mailInput="ngModel"><br>
                 <input type="text"  name="address"  placeholder="Enter your Address" ngModel #adderssInput="ngModel"><br>
-                <input type="text" name="contact"  placeholder="Enter your Contact" ngModel #contactInput="ngModel"><br>
+                <input type="text" name="contact"  placeholder="Enter your Contact" ngModel #contactInput="ngModel" maxlength="10"><br>
                 <button type="submit" [disabled]="mailInput.invalid && adderssInput.invalid && contactInput.invalid &&contactInput.touched">Order Now</button>
             </form>
             </div>

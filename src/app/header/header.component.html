@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg  nav-styel">
   <div class="container-fluid" >
-    <a class="navbar-logo text-color" routerLink="/">E-Commerce</a>
+    <a class="navbar-logo text-color" routerLink="/">Tredora</a>
     
     <button class="navbar-toggler  nav-tex" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -12,15 +12,29 @@
         <li class="nav-item">
           <a class="nav-link  nav-text" aria-current="page" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-text" routerLink="seller-auth">Seller</a>
+        <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle nav-text" id="moreDropdown" ngbDropdownToggle role="button">
+            More
+          </a>
+          <ul ngbDropdownMenu aria-labelledby="moreDropdown">
+            <li><a class="dropdown-item" routerLink="/customer-support">📞 24x7 Customer Care</a></li>
+            <li><button type="button" class="dropdown-item" (click)="goToNotification()">
+              
+              🔔  Notification Preferences
+            </button>
+            </li>
+            
+          </ul>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link nav-text" routerLink="seller-auth">Seller</a>
+        </li> -->
       </ul>
       
       <!-- form-control -->
       <div [ngSwitch]="menuType" class="search-margin">
         <form *ngSwitchCase="'default'" class="d-flex  me-auto" role="search">
-          <input #searchInput value="{{searchName}}" class="saerch me-1" type="search" (keyup)="searchProduct($event)" (blur)="hideSearch()"
+          <input #searchInput value="{{searchName}}"class="saerch me-1" type="search" (keyup)="searchProduct($event)" (blur)="hideSearch()"
             placeholder="    Search product" aria-label="Search">
           <button class="btn btn-outline-success" (click)="submintSearch(searchInput.value)" type="submit">Search</button>
         
@@ -41,21 +55,24 @@
             <li *ngFor="let item of searchResult">
               <a (mousedown)="redirectToDetails(item.name)" >{{item?.name}}</a>
             </li>
+            
           </ul>
         </form>
       </div>
       <div [ngSwitch]="menuType">
         <ul *ngSwitchCase="'default'" class="navbar-nav  mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link  nav-text" routerLink="user-auth" aria-current="page">Login/SingUp</a>
+            <a class="nav-link  nav-text" routerLink="user-auth" aria-current="page">Login/SignUp</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-text" href routerLink="cart-page">Cart({{cartItemsNumber}})</a>
           </li>
+         
         </ul>
-
-        <!-- ----------Seller header------------ -->
-        <ul *ngSwitchCase="'seller'" class="navbar-nav  mb-lg-0">
+       
+        
+      <!-- ----------Seller header------------ -->
+    <!-- <ul *ngSwitchCase="'seller'" class="navbar-nav  mb-lg-0">
           <li class="nav-item">
             <a class="nav-link  nav-text" aria-current="page" routerLink="seller-home">Product list</a>
           </li>
@@ -69,13 +86,13 @@
             <a class="nav-link nav-text logout"  (click)="sellerlogoutpopup()">Logout</a>
           </li>
        
-        </ul>
+        </ul>  -->
 
         <!-- ----------User header------------ -->
         <div *ngSwitchCase="'user'">  
         <ul  class="navbar-nav  mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link  nav-text" aria-current="page">{{userName | titlecase}}</a>
+            <p class="nav-link  nav-text" aria-current="page">{{userName | titlecase}}</p>
           </li>
           <li class="nav-item">
             <a class="nav-link  nav-text" routerLink="my-order" aria-current="page">My Orders</a>
@@ -84,7 +101,7 @@
             <a class="nav-link  nav-text" aria-current="page" href routerLink="cart-page">Cart({{cartItemsNumber}})</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-text logout"   (click)="userlogoutpopup()">Logout</a>
+            <a class="nav-link nav-text logout"  style="cursor: pointer;" (click)="userlogoutpopup()">Logout</a>
           </li>
         </ul>
       </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { cart, product } from '../data-type';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -13,7 +14,7 @@ export class ProductDetailsComponent implements OnInit {
   productQuantity:number=1;
   removeCart=false;
   cartData:product|undefined;
-  constructor(private activeRoute:ActivatedRoute, private product:ProductService) { }
+  constructor(private activeRoute:ActivatedRoute, private product:ProductService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     let productId= this.activeRoute.snapshot.paramMap.get('productId');
@@ -38,8 +39,7 @@ export class ProductDetailsComponent implements OnInit {
         this.product.getCartList(userId);
 
         this.product.cartData.subscribe((result)=>{
-          console.log(result)
-  
+        
           let item = result.filter((item:product)=>productId?.toString()===item.productId?.toString())
         
            if(item.length){
@@ -64,27 +64,53 @@ export class ProductDetailsComponent implements OnInit {
 
   addProduct() {
     this.removeCart = true;
-    if (this.productData) {
-      this.productData.quantity = this.productQuantity
 
-      if (!localStorage.getItem('user')) {
-        this.product.localAddToCart(this.productData)
-      }
-      else {
-        let user = localStorage.getItem('user')
-        let userId = user && JSON.parse(user).id;
-        let cartData: cart = { ...this.productData, userId, productId: this.productData.id }
+if (this.productData) {
+  this.productData.quantity = this.productQuantity;
 
-        delete cartData.id
-        this.product.userAddToCart(cartData).subscribe((result) => {
-          if (result) {
-            this.product.getCartList(userId);
-            this.removeCart = true
-          }
-        })
-
-      }
+  if (!localStorage.getItem('user')) {
+    // Handle guest cart
+    let cart = localStorage.getItem('localCart');
+    let items = cart ? JSON.parse(cart) : [];
+    
+    let existingIndex = items.findIndex((p: cart) => p.id === this.productData?.id);
+    
+    if (existingIndex !== -1) {
+      items[existingIndex].quantity = (items[existingIndex].quantity || 0) + this.productQuantity;
+    } else {
+      items.push({ ...this.productData, quantity: this.productQuantity });
     }
+    
+    localStorage.setItem('localCart', JSON.stringify(items));
+    this.product.cartData.next(items);
+    this.toastr.success(`${this.productData.name} has been added to your cart`);
+    
+  
+  } else {
+    // Handle user cart
+    let user = localStorage.getItem('user');
+    let userId = user && JSON.parse(user).id;
+
+    let cartData: cart = {
+      ...this.productData,
+      userId,
+      productId: this.productData.id,
+      quantity: this.productQuantity
+    };
+
+    delete cartData.id;
+
+    // Optional: You could first check if product is already in user’s cart using `this.product.getCartList()` and update if needed
+
+    this.product.userAddToCart(cartData).subscribe((result) => {
+      if (result) {
+        this.product.getCartList(userId); // Refresh cart list
+        this.removeCart = true;
+      }
+    });
+  }
+}
+
   }
 
   removeTocart(id: any) {

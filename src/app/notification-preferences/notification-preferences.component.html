@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h4>Desktop Notifications</h4>
+    <form>
+      <div *ngFor="let item of notificationItems" class="form-check">
+        <input class="form-check-input" type="checkbox" [id]="item.id" [(ngModel)]="item.enabled" name="{{item.id}}">
+        <label class="form-check-label" [for]="item.id">
+          <strong>{{item.title}}</strong> <br>
+          <small class="text-muted">{{item.description}}</small>
+        </label>
+      </div>
+    </form>
+  
+    <div class="alert alert-warning mt-4">
+      <i class="bi bi-bell-slash"></i>
+      Oops! You are missing out on a lot of important notifications.
+      <br />
+      Please switch it on from Browser Settings.
+      <br />
+      <strong>How to Unblock:</strong> <code>🔓 Notifications &gt; Allow</code>
+    </div>
+  </div>
+  

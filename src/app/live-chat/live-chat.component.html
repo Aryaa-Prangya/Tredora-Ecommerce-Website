@@ -1,0 +1,21 @@
+<div class="live-chat-container card shadow-sm">
+    <div class="chat-header bg-primary text-white d-flex justify-content-between align-items-center p-3">
+      <span><i class="bi bi-chat-dots-fill me-2"></i>Live Support</span>
+      <button class="btn-close btn-close-white" aria-label="Close" (click)="closeChat()"></button>
+    </div>
+  
+    <div class="chat-body p-3" id="chatMessages">
+      <div *ngFor="let message of chatMessages" [ngClass]="{'user-msg': message.sender === 'user', 'agent-msg': message.sender === 'agent'}" class="chat-message">
+        <div class="message-content">
+          <span>{{ message.text }}</span>
+          <small class="text-muted d-block mt-1">{{ message.timestamp }}</small>
+        </div>
+      </div>
+    </div>
+  
+    <div class="chat-input d-flex p-2 border-top">
+      <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" type="text" class="form-control me-2" placeholder="Type your message..." />
+      <button class="btn btn-primary" (click)="sendMessage()"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </div>
+  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { cart, order } from '../data-type';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +15,9 @@ export class CheckoutComponent implements OnInit {
   totalPrice:number|undefined
   cartData:cart[]|undefined
   orderMsg:string|undefined
+  
 ngOnInit(): void {
+
       this.product.currentCartData().subscribe((result)=>{
       let price =0;
       this.cartData=result;
@@ -29,15 +32,16 @@ ngOnInit(): void {
       this.totalPrice=price+(price/10)+100-((price/100*8))
 })
 }
-  oderNow(data:{email:string,address:string,contact:string}){
+  orderNow(data:{email:string,address:string,contact:string}){
     let user = localStorage.getItem('user')
     let userId=user && JSON.parse(user).id;
     if(this.totalPrice){
      let orderData:order={
-      ...data,
-      totalPrice:this.totalPrice,
-      userId,
-      id:undefined
+       ...data,
+       totalPrice: this.totalPrice,
+       userId,
+       id: undefined,
+       status: 'Order Placed'
      }
 
      this.cartData?.forEach(items => {

@@ -15,7 +15,9 @@ export interface product{
     color:string,
     category:string,
     description:string,
+    originalPrice:string,
     url:string,
+    deal:string,
     productId:undefined|number,
     id:number,
     quantity:undefined|number
@@ -46,6 +48,7 @@ export interface  order{
     email:string,
     address:string,
     contact:string,
+    status:string,
     totalPrice:number,
     userId:number,
     id:number|undefined
