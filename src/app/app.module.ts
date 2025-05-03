@@ -27,6 +27,7 @@ import { NotificationPreferencesComponent } from './notification-preferences/not
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { LiveChatComponent } from './live-chat/live-chat.component';
 import { ToastrModule } from 'ngx-toastr';
+import { WishlistComponent } from './wishlist/wishlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { ToastrModule } from 'ngx-toastr';
     AlertBoxComponent,
     NotificationPreferencesComponent,
     CustomerSupportComponent,
-    LiveChatComponent
+    LiveChatComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { NotificationPreferencesComponent } from './notification-preferences/notification-preferences.component';
 import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { LiveChatComponent } from './live-chat/live-chat.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   { path:'',component:HomeComponent},
@@ -60,6 +61,7 @@ const routes: Routes = [
   {
     path:'my-order',component:MyOrdersComponent
   },
+  { path: 'wishlist', component: WishlistComponent },
   {
     path:'alertbox',component:AlertBoxComponent
   }

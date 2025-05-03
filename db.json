@@ -158,10 +158,23 @@
       "id": "16"
     }
   ],
-  "user": [
-   
+  "user": [],
+  "cart": [
+    {
+      "id": "5131",
+      "name": "Mouse",
+      "price": "499",
+      "color": "Black",
+      "category": "Electronic",
+      "originalPrice": "799",
+      "deal": "Hot Deal",
+      "description": "HP Mouse",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdIN7ABCjTyVmmipaJCEJu1oi8fNQk6O5oKw&usqp=CAU",
+      "quantity": 1,
+      "userId": "fb3c",
+      "productId": "6"
+    }
   ],
-  "cart": [],
   "orders": [
     {
       "email": "as",

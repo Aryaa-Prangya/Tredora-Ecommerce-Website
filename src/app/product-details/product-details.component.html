@@ -42,8 +42,11 @@
                 <button (click)="minus()" (click)="removeTocart(productData?.id)" class="btn btn-outline-dark">−</button>
                 <button class="btn btn-outline-secondary" >{{ productQuantity }}</button>
                 <button (click)="plush()" class="btn btn-outline-dark">+</button>
+
               </div>
             </div>
+            <button (click)="addToWishlist(productData)" class="btn btn-outline-danger">❤️ Add to Wishlist</button>
+
           </div>
   
           <!-- Sizes -->

@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <h2>My Wishlist</h2>
+    <div class="row" *ngIf="wishlistItems.length; else empty">
+      <div class="col-md-4 mb-4" *ngFor="let item of wishlistItems">
+        <div class="card">
+          <img [src]="item.url" class="card-img-top" alt="{{ item.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">₹{{ item.price }}</p>
+            <a [routerLink]="['/product-details', item.id]" class="btn btn-primary">View Details</a>
+            <button (click)="remove(item.id)" class="btn btn-danger ms-2">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #empty>
+      <p>No items in your wishlist yet.</p>
+    </ng-template>
+  </div>
+  

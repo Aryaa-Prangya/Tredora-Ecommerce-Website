@@ -6,6 +6,7 @@ import { SearchComponent } from '../search/search.component';
 import { UserAuthComponent } from '../user-auth/user-auth.component';
 import { PopupboxService } from '../services/popupbox.service';
 import { Subscription } from 'rxjs';
+import { WishlistService } from '../services/wishlist.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   searchName: any = ''
   userName: any = ''
   cartItemsNumber = 0
-  constructor(private route: Router, private product: ProductService, private popup: PopupboxService) {
+  constructor(private route: Router, private product: ProductService, private popup: PopupboxService,private wishlistService: WishlistService) {
    
  this.popup.userLogoutEvent().subscribe((result)=>{
       if(result==true){
@@ -33,8 +34,14 @@ export class HeaderComponent implements OnInit {
  })
   
   }
-  ngOnInit(): void {
+  wishlistItems: any[] = [];
 
+
+
+  ngOnInit(): void {
+  this.wishlistService.getWishlist().subscribe(items => {
+    this.wishlistItems = items;
+  });
     let cartItem = localStorage.getItem('localCart')
     if (cartItem) {
       this.cartItemsNumber = JSON.parse(cartItem).length

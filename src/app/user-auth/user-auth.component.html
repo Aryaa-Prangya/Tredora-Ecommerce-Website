@@ -10,8 +10,14 @@
         <input type="text" formControlName="name" placeholder="Name" />
         <small class="fields" *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">Please enter your name</small>
         <input type="email" formControlName="email" placeholder="Email" />
+        <small class="fields" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">Email is required</small>
+
         <input type="password" formControlName="password" placeholder="Password" />
-        <button [disabled]="signupForm.invalid" type="submit">Sign Up</button>
+        <small class="fields" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">Password is required</small>
+        <small class="fields text-danger" *ngIf="signupForm.get('password')?.errors?.['pattern'] && signupForm.get('password')?.touched">
+          Password should be Min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+        </small>
+                <button [disabled]="signupForm.invalid" type="submit">Sign Up</button>
         <div class="or">OR</div>
 
         <p class="switch-text">
@@ -24,7 +30,7 @@
         <input type="email" formControlName="email" placeholder="Email" />
         <input type="password" formControlName="password" placeholder="Password" />
         <button [disabled]="loginForm.invalid" type="submit">Sign In</button>
-
+    
         <p class="switch-text">
           Don't have an account? <a (click)="toggleForm(false)">Sign Up</a>
         </p>

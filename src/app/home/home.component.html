@@ -1,57 +1,61 @@
+<div>
+  <app-alert-box></app-alert-box>
+  <router-outlet></router-outlet>
+</div>
 
-<div>
-    <app-alert-box></app-alert-box>
-    <router-outlet></router-outlet>
+<!-- Hero Section -->
+<div class="text-center my-5">
+  <h1 class="green">Discover. Shop. Love. Repeat.<br>Happy shopping!</h1>
 </div>
-<div class="">
-<div>
-    <h1 class="text-center mt-5">Discover. Shop. Love. Repeat
-        Happy shopping!</h1>
-</div>
+
+<!-- Carousel Section -->
 <ngb-carousel *ngIf="popularProduct">
-    <ng-template *ngFor="let item of popularProduct" ngbSlide>
-        <div class="picsum-img-wrapper">
-            <img routerLink="/product-details/{{item.id}}" class="img-home" src="{{item.url}}" alt="Random first slide" />
-        </div>
-        <div class="carousel-caption">
-            <h2 class="black">{{item.name}}</h2>
-            <p class="black">{{item.description}}</p>
-        </div>
-    </ng-template>
+  <ng-template *ngFor="let item of popularProduct" ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img routerLink="/product-details/{{item.id}}" class="img-home" [src]="item.url" alt="{{item.name}}" />
+    </div>
+    <div class="carousel-caption">
+      <h2>{{item.name}}</h2>
+      <p>{{item.description}}</p>
+    </div>
+  </ng-template>
 </ngb-carousel>
-</div>
-<!-- ------------------------------------------------------------------------- -->
 
+<!-- All Products Section -->
 <div class="container mt-5">
-    <h2 class="heading">All Products</h2>
-    <div class="row" *ngIf="allProduct">
-      <div class="col-12 col-sm-6  col-md-4 col-lg-3" *ngFor="let item of allProduct">
-        <div class="flipkart-card mb-4">
-          <img  [src]="item.url" class="product-img" alt="Product">
-  
-          <div class="card-content">
-            <h5 class="product-title">{{ item.name | slice:0:50 }}...</h5>
-            <p class="product-sub">Set of 1, {{ item.color }}</p>
-  
-            <div class="rating-row">
-              <span class="rating">4.1★</span>
-              <span class="rating-count">(872)</span>
-              
-            </div>
-  
-            <div class="price-row">
-              <span class="discounted-price">₹{{ item.price }}</span>
-              <span class="original-price">₹{{item.originalPrice}}</span>
-              <span class="offer">74% off</span>
-            </div>
-  
-            <p class="delivery">Free delivery</p>
-            <span *ngIf="item.deal" class="hot-deal">{{ item.deal }}</span><br>
+  <h2 class="heading">All Products</h2>
+  <div class="row" *ngIf="allProduct">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of allProduct">
+      <div class="flipkart-card mb-4">
+        <img [src]="item.url" class="product-img" alt="Product image" />
+        <div class="card-content">
+          <h5 class="product-title">{{ item.name | slice:0:50 }}...</h5>
+          <p class="product-sub">Set of 1, {{ item.color }}</p>
 
-            <a routerLink="/product-details/{{item.id}}" class="view-more-link">View more...</a>
+          <div class="rating-row flex" style="gap: 128px;">
+            <div class="ratings">
+            <span class="rating">4.1★</span>
+            <span class="rating-count">(872)</span>
           </div>
+            <div class="mb-2">
+              <button class="btn btn-light shadow-sm" (click)="addToWishlist(item)" title="Add to Wishlist">❤️</button>
+            </div>
+          </div>
+
+         
+
+          <div class="price-row">
+            <span class="discounted-price">₹{{ item.price }}</span>
+            <span class="original-price">₹{{item.originalPrice}}</span>
+            <span class="offer">74% off</span>
+          </div>
+
+          <p class="delivery">Free delivery</p>
+          <span *ngIf="item.deal" class="hot-deal">{{ item.deal }}</span><br>
+
+          <a routerLink="/product-details/{{item.id}}" class="view-more-link">View more...</a>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

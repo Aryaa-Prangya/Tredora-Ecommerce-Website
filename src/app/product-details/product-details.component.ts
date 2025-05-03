@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { cart, product } from '../data-type';
 import { ToastrService } from 'ngx-toastr';
+import { WishlistService } from '../services/wishlist.service';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -14,8 +15,10 @@ export class ProductDetailsComponent implements OnInit {
   productQuantity:number=1;
   removeCart=false;
   cartData:product|undefined;
-  constructor(private activeRoute:ActivatedRoute, private product:ProductService,private toastr:ToastrService) { }
-
+  constructor(private activeRoute:ActivatedRoute, private product:ProductService,private toastr:ToastrService,private wishlistService: WishlistService) { }
+  addToWishlist(product: any) {
+    this.wishlistService.addToWishlist(product);
+  }
   ngOnInit(): void {
     let productId= this.activeRoute.snapshot.paramMap.get('productId');
     console.warn(productId);
